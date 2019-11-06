@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <dlfcn.h>
-
+#include <errno.h>
+#include <string.h>
 typedef int(*pfoo)();
 
 int main(){
   void *handler = dlopen("./libtest.so",RTLD_NOW);
   if(handler == NULL){
-    printf("dlopen() failed\n");
+    printf("dlopen libtest.so failed. errno(-%d): %s\n",errno, strerror(errno));
     return -1;
   }
 
